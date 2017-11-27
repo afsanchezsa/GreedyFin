@@ -25,6 +25,7 @@ public class GreedyKing extends JFrame {
         setTitle("Greedy King");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        
     };
     
     public static void main(String[] args) {

@@ -24,6 +24,7 @@ public class Personaje {
     private int posicionY;
     private int posicionXPaint;
     private int posicionYPaint;
+    
     private int numImagen;//numero de animaciones
     private int[][] animacion = {//Matriz con las posiciones para la animacion del personaje
         {5, 2},//No se mueve derecha {5,2}
