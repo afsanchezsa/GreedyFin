@@ -5,6 +5,7 @@
  */
 package greedyking;
 
+import Logica.Cargar;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -13,10 +14,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimerTask;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.FloatControl;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -144,7 +148,7 @@ public class Board extends JPanel implements ActionListener {
     int[] f045 = {11, 2, 0};
     int[] f046 = {12, 2, 2};
     int[] f132 = {13, 7, 0};
-    int[][][][] mapa = {
+   /* int[][][][] mapa = {
         //    0          1              2               3             4           5             6             7             8             9             10           11             12            13            14            15           16             17            18            19            20            21            22            23            24            25            26            27             28            29
         {{fnul,f107},{f107, f061}, {fnul, f062}, {fnul, f062}, {f107, f063}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {f107, f020}, {f107, f021}, {f107, f022}, {f107, f023}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {fnul, f107}},//0
         {{fnul,f107},{fnul, f107}, {f107, f068}, {f107, f069}, {f107, f070}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {f107, f036}, {f107, f037}, {f107, f038}, {f107, f039}, {fnul, f107}, {fnul, f107}, {fnul, f107}, {f107, f113}, {f107, f114}, {f107, f114}, {f107, f114}, {f107, f114}, {f107, f114}, {f107, f114}, {f107, f114}, {f107, f114}, {f107, f115}, {fnul, f107}},//1
@@ -154,119 +158,134 @@ public class Board extends JPanel implements ActionListener {
         {{fnul,f107},{fnul, f107}, {fnul, f107}, {f107, f130}, {fnul, f131}, {f131, f027}, {fnul, f028}, {fnul, f028}, {fnul, f028}, {f107, f029}, {fnul, f107}, {f107, f105}, {f107, f106}, {fnul, f107}, {f107, f027}, {fnul, f028}, {fnul, f028}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f028}},//5
         {{fnul,f107},{fnul, f008}, {fnul, f008}, {fnul, f009}, {fnul, f028}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {f127, f046}, {fnul, f127}, {fnul, f127}, {fnul, f127}, {fnul, f127}, {f127, f044}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}},//6
         {{fnul,f107},{fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {f144, f046}, {fnul, f144}, {fnul, f144}, {fnul, f144}, {fnul, f144}, {f144, f044}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}, {fnul, f045}},//7
-    };
-    
-    
+    };*/
+    int mapa[][][][];
+    private Cargar cargar;
     //sonido
     Sonidos sonidos = new Sonidos();
     
     private int cuadroInicioMovMapaPersonaje = 8;
-    
+    private ArrayList<String>entradas;
     public Board() {
-        this.matriz=new TreeMap<>();
-        matriz.put("fnul", fnul);
-         matriz.put("f107", f107);
-         matriz.put("f027", f027);
-         matriz.put("f028", f028);
-         matriz.put("f029", f029);
-         matriz.put("f041", f041);
-         matriz.put("f061", f061);
-         matriz.put("f062", f062);
-         matriz.put("f063", f063);
-         matriz.put("f127", f127);
-         matriz.put("f144", f144);
-         matriz.put("f113", f113);
-         matriz.put("f114", f114);
-         matriz.put("f115", f115);
-         matriz.put("f164", f164);
-         matriz.put("f020", f020);
-         matriz.put("f021", f021);
-         matriz.put("f022", f022);
-         matriz.put("f023", f023);
-         matriz.put("f036", f036);
-         matriz.put("f037", f037);
-         matriz.put("f038", f038);
-         matriz.put("f039", f039);
-         matriz.put("f053", f053);
-         matriz.put("f054", f054);
-         matriz.put("f055", f055);
-         matriz.put("f056", f056);
-         matriz.put("f071", f071);
-         matriz.put("f072", f072);
-         matriz.put("f073", f073);
-         matriz.put("f088", f088);
-         matriz.put("f089", f089);
-         matriz.put("f105", f105);
-         matriz.put("f106", f106);
-         matriz.put("f122", f122);
-         matriz.put("f123", f123);
-         matriz.put("f138", f138);
-         matriz.put("f139", f139);
-         matriz.put("f140", f140);
-         matriz.put("f017", f017);
-         matriz.put("f018", f018);
-         matriz.put("f035", f035);
-         matriz.put("f068", f068);
-         matriz.put("f069", f069);
-         matriz.put("f070", f070);
-         matriz.put("f086", f086);
-         matriz.put("f087", f087);
-         matriz.put("f008", f008);
-         matriz.put("f009", f009);
-         matriz.put("f130", f130);
-         matriz.put("f131", f131);
-         matriz.put("f044", f044);
-         matriz.put("f045", f045);
-         matriz.put("f046", f046);
-         matriz.put("f132", f132);
-         
-         
-                 
-                 
-                 
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        this.personaje = new Personaje(scale);
-        timer = new Timer(this.delay,this);
-        setFocusable(true);
-        addKeyListener(new EventosTeclado());
-        timer.start();
-        sonidos.musicaFondo.asignarDireccion("Troll Song 10 The Happy Troll",true);
-        sonidos.musicaFondo.reproducir();
-        sonidos.caminar.asignarDireccion("slime5",true);
-        sonidos.salto.asignarDireccion("sfx_movement_jump20", false);
-        sonidos.caida.asignarDireccion("sfx_sounds_falling12", false);
-        sonidos.perdidaDeVida.asignarDireccion("sfx_deathscream_human1", false);
-        this.firstTimeD = true;
+        try {
+            this.matriz=new TreeMap<>();
+            this.entradas=new ArrayList<>();
+            this.cargar=new Cargar();
+            this.mapa=new int[8][this.cargar.Ancho()][2][3];
+            this.entradas=this.cargar.getEntradas();
+            matriz.put("fnul", fnul);
+            matriz.put("f107", f107);
+            matriz.put("f027", f027);
+            matriz.put("f028", f028);
+            matriz.put("f029", f029);
+            matriz.put("f041", f041);
+            matriz.put("f061", f061);
+            matriz.put("f062", f062);
+            matriz.put("f063", f063);
+            matriz.put("f127", f127);
+            matriz.put("f144", f144);
+            matriz.put("f113", f113);
+            matriz.put("f114", f114);
+            matriz.put("f115", f115);
+            matriz.put("f164", f164);
+            matriz.put("f020", f020);
+            matriz.put("f021", f021);
+            matriz.put("f022", f022);
+            matriz.put("f023", f023);
+            matriz.put("f036", f036);
+            matriz.put("f037", f037);
+            matriz.put("f038", f038);
+            matriz.put("f039", f039);
+            matriz.put("f053", f053);
+            matriz.put("f054", f054);
+            matriz.put("f055", f055);
+            matriz.put("f056", f056);
+            matriz.put("f071", f071);
+            matriz.put("f072", f072);
+            matriz.put("f073", f073);
+            matriz.put("f088", f088);
+            matriz.put("f089", f089);
+            matriz.put("f105", f105);
+            matriz.put("f106", f106);
+            matriz.put("f122", f122);
+            matriz.put("f123", f123);
+            matriz.put("f138", f138);
+            matriz.put("f139", f139);
+            matriz.put("f140", f140);
+            matriz.put("f017", f017);
+            matriz.put("f018", f018);
+            matriz.put("f035", f035);
+            matriz.put("f068", f068);
+            matriz.put("f069", f069);
+            matriz.put("f070", f070);
+            matriz.put("f086", f086);
+            matriz.put("f087", f087);
+            matriz.put("f008", f008);
+            matriz.put("f009", f009);
+            matriz.put("f130", f130);
+            matriz.put("f131", f131);
+            matriz.put("f044", f044);
+            matriz.put("f045", f045);
+            matriz.put("f046", f046);
+            matriz.put("f132", f132);
+            int num1=0;
+            int num2=0;
+            int num3=0;
+            int num4=0;
+            
+            for(String s:this.entradas){
+            this.mapa[num1][num2][num3][num4];
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            this.personaje = new Personaje(scale);
+            timer = new Timer(this.delay,this);
+            setFocusable(true);
+            addKeyListener(new EventosTeclado());
+            timer.start();
+            sonidos.musicaFondo.asignarDireccion("Troll Song 10 The Happy Troll",true);
+            sonidos.musicaFondo.reproducir();
+            sonidos.caminar.asignarDireccion("slime5",true);
+            sonidos.salto.asignarDireccion("sfx_movement_jump20", false);
+            sonidos.caida.asignarDireccion("sfx_sounds_falling12", false);
+            sonidos.perdidaDeVida.asignarDireccion("sfx_deathscream_human1", false);
+            this.firstTimeD = true;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void otherKeyPressed(int key){

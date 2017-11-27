@@ -19,6 +19,7 @@ class Enemigo {
     private int x;
     private int y;
     private BufferedImage ImagenGeneral;
+    private BufferedImage ImagenGeneralI;
     private Image[]imagenesderecha=new Image[4];
     private Image[]imagenesizquierda=new Image[4];
     private int indicederecha;
@@ -30,15 +31,17 @@ class Enemigo {
         imagenesderecha=new Image[4];
         imagenesizquierda=new Image[4];
         this.derecha=true;
-        
+        this.ImagenGeneralI=ImageIO.read(new File("charactersI.png"));
     this.ImagenGeneral=ImageIO.read(new File("characters.png"));
     for(int i=0;i<4;i++){
     this.imagenesderecha[i]=(BufferedImage)ImagenGeneral.getSubimage(i*32, 64, 32, 32);
     
     }
-    for(int i=1;i<4;i++){
-    this.imagenesizquierda[i]=(BufferedImage)ImagenGeneral.getSubimage(i*32, 64, 32,32);
+    
+    for(int i=0;i<3;i++){
+    this.imagenesizquierda[i]=(BufferedImage)ImagenGeneralI.getSubimage((i+5)*32, 64, 32,32);
     }
+   
     this.indicederecha=0;
     this.indiceizquierda=0;
     
@@ -95,8 +98,16 @@ class Enemigo {
    }
    }
 
-    public void setDerecha(boolean derecha) {
-        this.derecha = derecha;
+    public boolean isDerecha() {
+        return derecha;
+    }
+
+    public void cambiardedireccion(){
+    if(this.derecha){
+    this.derecha=false;
+    }else{
+    this.derecha=true;
+    }
     }
 
     

@@ -32,10 +32,12 @@ private Enemigo enemigo;
         int x;
         int y;
         while(true){
+            
             for(int i=0;i<100;i++){
+            
                 
         x=this.enemigo.getX();
-         y=this.enemigo.getY();
+        
         this.enemigo.Aumentarderecha();
         this.enemigo.setX(x+4);
             try {
@@ -58,12 +60,13 @@ private Enemigo enemigo;
             this.enemigo.setY(y+1);
             }
             this.enemigo.Aumentarderecha();
-        break;
+            
+            break;
         
         }
         }
             
-        
+        this.enemigo.cambiardedireccion();
     for(int m=0;m<100;m++){
        x=this.enemigo.getX();
        y=this.enemigo.getY();
@@ -89,10 +92,12 @@ private Enemigo enemigo;
             this.enemigo.setY(y+1);
             }
             this.enemigo.Aumentarderecha();
-        break;
+            
+        
+            break;
         
         }
-    }
+    }this.enemigo.cambiardedireccion();
         }
 }
 }

@@ -36,4 +36,13 @@ public class Cargar {
     public ArrayList<String> getEntradas() {
         return entradas;
     }
+    public int Ancho(){
+    String s="";
+    int numero=0;   
+    while(!s.equals(";")){
+        s=entrada.next();
+        numero++;
+        }
+    return numero;
+    }
 }
